@@ -15,7 +15,7 @@ function BookSummary() {
         setLoading(true);
         setError(null);
         // Assuming you have an API endpoint to fetch a single book by ID
-        const res = await axios.get(`http://localhost:3000/book/${id}`); // Assuming id from useParams is the _id
+        const res = await axios.get(`https://bookstore-app-h8tn.onrender.com/book/${id}`); // Assuming id from useParams is the _id
         setBook(res.data);
       } catch (err) {
         console.error("Error fetching book details:", err);

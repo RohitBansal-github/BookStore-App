@@ -9,7 +9,7 @@ function Course() {
   useEffect(() => {
     const getBooks = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/book");
+        const res = await axios.get("https://bookstore-app-h8tn.onrender.com/book");
         setBooks(res.data);
       } catch (error) {
         console.error("Failed to fetch books:", error);

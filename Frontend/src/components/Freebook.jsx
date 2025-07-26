@@ -14,7 +14,7 @@ function Freebook() {
         setLoading(true);
         setError(null);
         // Assuming your backend has an endpoint for free books, e.g., /book/free or /book?free=true
-        const res = await axios.get('http://localhost:3000/book/free'); 
+        const res = await axios.get('https://bookstore-app-h8tn.onrender.com/book/free'); 
         setFreeBooks(res.data);
         setLoading(false);
       } catch (err) {

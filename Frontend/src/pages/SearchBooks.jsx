@@ -21,7 +21,7 @@ function SearchBooks() {
       try {
         setLoading(true);
         setError(null);
-        const res = await axios.get(`http://localhost:3000/book/search?query=${searchQuery}`);
+        const res = await axios.get(`https://bookstore-app-h8tn.onrender.com/book/search?query=${searchQuery}`);
         setBooks(res.data);
       } catch (err) {
         console.error("Error fetching search results:", err);

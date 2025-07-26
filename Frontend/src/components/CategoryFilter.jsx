@@ -7,7 +7,7 @@ function CategoryFilter() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch('http://localhost:3000/book/categories');
+        const res = await fetch('https://bookstore-app-h8tn.onrender.com/book/categories');
         const data = await res.json();
         setCategories(data);
       } catch (error) {

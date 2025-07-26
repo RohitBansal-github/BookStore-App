@@ -11,7 +11,7 @@ function Signup() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:3000/user/signup', {
+      const response = await fetch('https://bookstore-app-h8tn.onrender.com/user/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),

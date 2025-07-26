@@ -19,7 +19,7 @@ function AllBooks() {
       try {
         setLoading(true);
         setError(null);
-        const res = await axios.get('http://localhost:3000/book/all'); // Assuming this is your backend endpoint
+        const res = await axios.get('https://bookstore-app-h8tn.onrender.com/book/all'); // Assuming this is your backend endpoint
         setBooks(res.data);
         setLoading(false);
       } catch (err) {

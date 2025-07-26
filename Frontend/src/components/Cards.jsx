@@ -27,7 +27,7 @@ function Card({ book }) {
       return;
     }
     try {
-      const res = await axios.post('http://localhost:3000/book/create-checkout-session', { bookId: book._id });
+      const res = await axios.post('https://bookstore-app-h8tn.onrender.com/book/create-checkout-session', { bookId: book._id });
       if (res.data.url) {
         window.location.href = res.data.url;
       } else {
@@ -52,7 +52,7 @@ function Card({ book }) {
         return;
       }
 
-      const res = await axios.post('http://localhost:3000/book/toggle-like', { bookId: book._id }, {
+      const res = await axios.post('https://bookstore-app-h8tn.onrender.com/book/toggle-like', { bookId: book._id }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -80,7 +80,7 @@ function Card({ book }) {
         return;
       }
 
-      const res = await axios.post('http://localhost:3000/user/wishlist/add', { bookId: book._id }, {
+      const res = await axios.post('https://bookstore-app-h8tn.onrender.com/user/wishlist/add', { bookId: book._id }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

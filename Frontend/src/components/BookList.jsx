@@ -10,12 +10,12 @@ function BookList({ category, searchQuery }) {
     const fetchBooks = async () => {
       setLoading(true);
       setError(null);
-      let url = 'http://localhost:3000/book';
+      let url = 'https://bookstore-app-h8tn.onrender.com/book';
 
       if (category) {
-        url = `http://localhost:3000/book/category/${category}`;
+        url = `https://bookstore-app-h8tn.onrender.com/book/category/${category}`;
       } else if (searchQuery) {
-        url = `http://localhost:3000/book/search?query=${searchQuery}`;
+        url = `https://bookstore-app-h8tn.onrender.com/book/search?query=${searchQuery}`;
       }
 
       try {

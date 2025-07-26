@@ -24,7 +24,7 @@ function Wishlist() {
       setLoading(true);
       setError(null);
       const token = JSON.parse(localStorage.getItem("Users")).token;
-      const res = await axios.get('http://localhost:3000/user/wishlist', {
+      const res = await axios.get('https://bookstore-app-h8tn.onrender.com/user/wishlist', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,7 +43,7 @@ function Wishlist() {
   const handleRemoveFromWishlist = async (bookId) => {
     try {
       const token = JSON.parse(localStorage.getItem("Users")).token;
-      const res = await axios.delete('http://localhost:3000/user/wishlist/remove', {
+      const res = await axios.delete('https://bookstore-app-h8tn.onrender.com/user/wishlist/remove', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
