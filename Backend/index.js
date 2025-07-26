@@ -13,7 +13,11 @@ import Stripe from "stripe";
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ["https://book-store-app-beta-six.vercel.app", "http://localhost:5173"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  credentials: true
+}));
 app.use(express.json());
 app.use(helmet());
 
@@ -43,5 +47,9 @@ const startServer = async () => {
     console.log(`Server is listening on port ${PORT}`);
   });
 };
+
+app.get("/",(req,res)=>{
+  res.send("Hello from server");
+});
 
 startServer();
