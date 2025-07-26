@@ -2,35 +2,46 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-
-import bookRoute from "./route/book.route.js";
-import userRoute from "./route/user.route.js";
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
+import helmet from "helmet";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 4000;
+import bookRoutes from "./route/book.route.js";
+import userRoute from "./route/user.route.js";
+import Stripe from "stripe";
+
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(helmet());
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+const PORT = process.env.PORT || 3000;
 const URI = process.env.MongoDBURI;
 
 // connect to mongoDB
-try {
-    mongoose.connect(URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
+const connectDB = async () => {
+  try {
+    await mongoose.connect(URI);
     console.log("Connected to mongoDB");
-} catch (error) {
-    console.log("Error: ", error);
-}
+  } catch (error) {
+    console.error("Error connecting to mongoDB:", error);
+    process.exit(1);
+  }
+};
 
 // defining routes
-app.use("/book", bookRoute);
+app.use("/book", bookRoutes(stripe));
 app.use("/user", userRoute);
 
-app.listen(PORT, () => {
+const startServer = async () => {
+  await connectDB();
+  app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
-});
+  });
+};
+
+startServer();

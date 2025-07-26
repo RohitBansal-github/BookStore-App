@@ -1,35 +1,26 @@
-import React from "react";
-import { useAuth } from "../context/AuthProvider";
-import toast from "react-hot-toast";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useAuth } from '../context/AuthProvider.jsx';
 
 function Logout() {
-  const [authUser, setAuthUser] = useAuth();
-  const handleLogout = () => {
-    try {
-      setAuthUser({
-        ...authUser,
-        user: null,
-      });
-      localStorage.removeItem("Users");
-      toast.success("Logout successfully");
+  const [, , , logout] = useAuth();
+  const navigate = useNavigate();
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-    } catch (error) {
-      toast.error("Error: " + error);
-      setTimeout(() => {}, 2000);
-    }
+  const handleLogout = () => {
+    logout();
+    toast.success('Logged out successfully!');
+    navigate('/');
   };
+
   return (
-    <div>
-      <button
-        className="px-3 py-2 bg-red-500 text-white rounded-md cursor-pointer"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
-    </div>
+    <button
+      onClick={handleLogout}
+      className="btn bg-red-500 text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 transition-colors"
+      aria-label="Logout"
+    >
+      Logout
+    </button>
   );
 }
 

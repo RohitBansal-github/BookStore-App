@@ -1,44 +1,63 @@
-import React from "react";
-import banner from "../../public/Banner.png";
+import React from 'react';
+import banner from '/Banner.png'; // Place image in src/assets/
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
 function Banner() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = (data) => {
+    toast.success(`Subscribed with ${data.email}`);
+    // Add API call to handle email subscription
+    navigate("/allbooks");
+  };
+
+  const navigate = useNavigate();
+
   return (
-    <>
-      <div className=" max-w-screen-2xl container mx-auto md:px-20 px-4 flex flex-col md:flex-row my-10">
-        <div className="w-full order-2 md:order-1 md:w-1/2 mt-12 md:mt-36">
-          <div className="space-y-8">
-            <h1 className="text-2xl md:text-4xl font-bold">
-              Hello, welcomes here to learn something{" "}
-              <span className="text-pink-500">new everyday!!!</span>
-            </h1>
-            <p className="text-sm md:text-xl">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor,
-              et totam. Tempora amet atque expedita, quae corrupti totam sed
-              pariatur corporis at veniam est voluptas animi!
-            </p>
-            <label className="input input-bordered flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 opacity-70"
-              >
-                <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-              </svg>
-              <input type="text" className="grow" placeholder="Email" />
-            </label>
+    <div className="max-w-screen-2xl container mx-auto px-4 md:px-20 flex flex-col md:flex-row items-center gap-8 my-16 bg-gray-100 dark:bg-slate-800 text-black dark:text-white">
+      <div className="w-full md:w-1/2 space-y-6">
+        <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+          Welcome to a world where you{' '}
+          <span className="text-primary dark:text-primary">learn something new everyday!</span>
+        </h1>
+        <p className="text-base md:text-lg text-gray-600 dark:text-gray-300">
+          Boost your skills with top-notch resources, free eBooks, and tutorials built for passionate learners like you.
+        </p>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col sm:flex-row gap-4">
+          <div className="w-full sm:w-2/3">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="input input-bordered w-full bg-gray-200 dark:bg-slate-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary transition-colors"
+              {...register('email', { required: 'Email is required' })}
+              aria-invalid={errors.email ? 'true' : 'false'}
+              aria-describedby={errors.email ? 'email-error' : undefined}
+            />
+            {errors.email && (
+              <span id="email-error" className="text-red-500 dark:text-red-400 text-sm">
+                {errors.email.message}
+              </span>
+            )}
           </div>
-          <button className="btn mt-6 btn-secondary">Get Started</button>
-        </div>
-        <div className=" order-1 w-full mt-20 md:w-1/2">
-          <img
-            src={banner}
-            className="md:w-[550px] md:h-[460px] md:ml-12"
-            alt=""
-          />
-        </div>
+          <button
+            className="btn bg-primary text-white hover:bg-secondary dark:bg-primary dark:hover:bg-secondary w-full sm:w-1/3 transition-colors duration-300 ease-in-out transform hover:scale-105"
+            type="submit"
+          >
+            Subscribe
+          </button>
+        </form>
       </div>
-    </>
+      <div className="w-full md:w-1/2 flex justify-center">
+        <img
+          src={banner}
+          alt="Learning platform banner"
+          className="w-[90%] md:w-[550px] md:h-[460px] object-contain dark:brightness-90"
+          loading="lazy"
+        />
+      </div>
+    </div>
   );
 }
 

@@ -1,9 +1,62 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Poppins", sans-serif;
+@layer base {
+  html {
+    @apply min-h-screen;
+  }
+  body {
+    font-family: "Poppins", sans-serif;
+    @apply bg-gray-100 dark:bg-slate-900 text-black dark:text-white min-h-screen pt-24;
+  }
+  .btn, .link, .input, .textarea {
+    @apply transition-colors duration-200;
+  }
+  /* Override DaisyUI defaults with higher specificity */
+  .bg-base-100 {
+    background-color: #f3f4f6; /* gray-100 */
+  }
+  .dark .bg-base-100 {
+    background-color: #1e293b; /* slate-900 */
+  }
+  .text-base-content {
+    color: #000000; /* black */
+  }
+  .dark .text-base-content {
+    color: #ffffff; /* white */
+  }
+  main {
+    @apply mt-8; /* Ensure main content clears navbar */
+  }
+  /* Slide-in animation for mobile menu */
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-in-out;
+  }
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  .animate-pulse-btn {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 }
